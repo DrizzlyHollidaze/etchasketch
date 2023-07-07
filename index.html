@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <head>
     <title>Etch A Sketch</title>
-    <link rel="style" href="styles.css">
-    <script src="etch.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
+    <script src="etch.js" defer></script>
 </head>
 <body>
     <div class="wrapper">
@@ -13,7 +13,14 @@
             </div>
             <div class="gameContainer">
                 <div class="userOptions">
-
+                    <button id="black">Black</button>
+                    <button id="rainbow">Rainbow</button>
+                    <button id="Erase">Erase</button>
+                    <button id="MakeGrid">Make Grid</button>
+                    <div class="sliderContainer">
+                        <p>Number of squares</p>
+                        <input type="range" min="4" max="100" value="16" class="slider" id="numSquares">
+                    </div>
                 </div>
                 <div class="gridContainer" id="gridContainer">
 
