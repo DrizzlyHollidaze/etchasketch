@@ -1,7 +1,7 @@
 let colorChoice;
 let numOfSquares;
-let choiceSquares = 16; //temp code for testing purposes later on this will be a user input
-let size =60;
+let choiceSquares = 16; // defualt option
+let size =60; //default size
 const gridContainer = document.querySelector('#gridContainer');
 let h = 0;
 let etchGrid = [];
@@ -15,7 +15,7 @@ const btnErase = document.querySelector('#clearAll');
 const pSquare = document.querySelector('#squareInfo');
 const btnRainbow = document.querySelector('#rainbow');
 
-colorChoice = 'black'; // temp code for early version will delete after impleting rainbow feature
+colorChoice = 'black'; // default option
 numOfSquares = choiceSquares*choiceSquares;
 
 
@@ -44,6 +44,7 @@ function createElement(etchGrid) {
 
 function squareSliderChange() {
     choiceSquares = document.getElementById("squareSlider").value;
+    pSquare.innerText = `The number of squares is ${choiceSquares}`;
 }
 
 function elementSize(num) {
@@ -65,7 +66,7 @@ function clearGrid() {
 btnErase.addEventListener("click", function()  {
     clearGrid();
     createElement(etchGrid);
-    pSquare.innerHTML = `The number of squres is ${choiceSquares}`;
+   
 });
 
 btnBlack.addEventListener("click", function() {
