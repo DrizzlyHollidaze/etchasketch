@@ -1,16 +1,19 @@
 let colorChoice;
 let numOfSquares;
 let choiceSquares = 16; //temp code for testing purposes later on this will be a user input
-let size;
+let size =60;
 const gridContainer = document.querySelector('#gridContainer');
 let h = 0;
 let etchGrid = [];
+let isRainbow = false;
+let rainbowArray = ["red", "orange", "yellow", "green", "blue", "purple"];
 
 
 const makeGrid = document.querySelector("#MakeGrid");
 const btnBlack = document.querySelector('#black');
 const btnErase = document.querySelector('#clearAll');
-
+const pSquare = document.querySelector('#squareInfo');
+const btnRainbow = document.querySelector('#rainbow');
 
 colorChoice = 'black'; // temp code for early version will delete after impleting rainbow feature
 numOfSquares = choiceSquares*choiceSquares;
@@ -18,18 +21,20 @@ numOfSquares = choiceSquares*choiceSquares;
 
 
 createElement(etchGrid);
-
-
+pSquare.innerHTML = `The number of squres is ${choiceSquares}`;
+let containerSize = (size) * choiceSquares ;
+document.getElementsByClassName("gridContainer")[0].style.height = `${containerSize}px`;
+document.getElementsByClassName("gridContainer")[0].style.width = `${containerSize}px`;
 function createElement(etchGrid) {
     for (i = 0; i < choiceSquares; i++) {
         gridContainer.innerHTML += `<div class="row" id="row${i}" </div>`;
         let gridRow = document.querySelector(`#row${i}`);
-        document.getElementsByClassName("row")[i].style.height = "60px";
+        //document.getElementsByClassName("row")[i].style.height = `${size}px`;
         for (j = 0; j < choiceSquares; j++) {
             gridRow.innerHTML += `<div class="square" id=r"${i}c${j}" onmouseover="changeColor(this)"> </div>`;
 
-            document.getElementsByClassName("square")[h].style.height = "60px";
-            document.getElementsByClassName("square")[h].style.width = "60px";
+            document.getElementsByClassName("square")[h].style.height = `${size}px`;
+            document.getElementsByClassName("square")[h].style.width =  `${size}px`;
 
             etchGrid.push(document.getElementsByClassName("square")[h]);
             h++;
@@ -37,11 +42,13 @@ function createElement(etchGrid) {
     }
 } //creates the grid
 
-
+function squareSliderChange() {
+    choiceSquares = document.getElementById("squareSlider").value;
+}
 
 function elementSize(num) {
     size = 960 / num;
-    size = Math.trunc();
+    
     return size;
 } // sets the size of the squares.
 
@@ -58,6 +65,32 @@ function clearGrid() {
 btnErase.addEventListener("click", function()  {
     clearGrid();
     createElement(etchGrid);
+    pSquare.innerHTML = `The number of squres is ${choiceSquares}`;
 });
 
+btnBlack.addEventListener("click", function() {
+    colorChoice = "black";
+    isRainbow = false;
+})
 
+btnRainbow.addEventListener("click", function() {
+    isRainbow = true; 
+})
+
+makeGrid.addEventListener("click", function() {
+    clearGrid();
+    squareSliderChange();
+    size = elementSize(choiceSquares);
+    createElement(etchGrid);
+})
+
+gridContainer.addEventListener("mouseover", function() {
+    randomColor();
+})
+
+
+function randomColor () {
+    if (isRainbow == true) {
+        colorChoice = rainbowArray [(Math.floor(Math.random() * rainbowArray.length))];
+    }
+}
